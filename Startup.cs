@@ -61,8 +61,10 @@ namespace AspNetSandbox2
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
             });
         }
     }
+    //api.openweathermap.org/data/2.5/weather?lat=45.6427&lon=25.5887&appid=baf0ee4e9de6d933b877336983a0b1c8
 }
