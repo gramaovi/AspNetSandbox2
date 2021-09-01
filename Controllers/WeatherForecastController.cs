@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RestSharp;
 
 namespace AspNetSandbox2.Controllers
 {
@@ -25,6 +26,28 @@ namespace AspNetSandbox2.Controllers
 
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
+        {
+            var client = new RestClient("http://api.openweathermap.org/data/2.5/weather?lat=45.6427&lon=25.5887&appid=baf0ee4e9de6d933b877336983a0b1c8");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            IRestResponse response = client.Execute(request);
+            Console.WriteLine(response.Content);
+
+            return ConvertResponseToWeatherForecast(response.Content);
+
+            
+            //var rng = new Random();
+            //return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            //{
+            //    Date = DateTime.Now.AddDays(index),
+            //    TemperatureC = rng.Next(-20, 55),
+            //    Summary = Summaries[rng.Next(Summaries.Length)]
+            //})
+            //.ToArray();
+            
+        }
+
+        private IEnumerable<WeatherForecast> ConvertResponseToWeatherForecast(string content)
         {
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
