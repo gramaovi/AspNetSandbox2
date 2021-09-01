@@ -42,11 +42,15 @@
     <div class="google-commands ">
         <a href="#" class="button1">Google Search</a>
         <a href="#" class="button1">I`m Feeling Lucky</a>
-
+        <!-- 
         <p class="languages">Google offered in:
             <a href="#"="Romana">Romana</a> 
             <a href="#"="English">    English</a>
             <a href="#"="Magyar">    Magyar</a></p>
+            -->
+        <textarea id="weather">
+            
+        </textarea>
     </div>
 </div>
 
@@ -87,6 +91,7 @@
 
     $.ajax(settings).done(function (response) {
         console.log(response);
+        $('#weather').val("The weather: " + response[0].summary);
     });
 </script>
 </html>
