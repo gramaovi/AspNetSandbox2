@@ -9,7 +9,7 @@ namespace AspNetSandbox.Tests
     public class WeatherForecastControllerTest
     {
         [Fact]
-        public void ConvertResponseToWeatherForecastTest()
+        public void ConvertResponseToWeatherForecastForTomorrowTest()
         {
             // Assume
             string content = LoadJsonFromResource();
@@ -23,6 +23,22 @@ namespace AspNetSandbox.Tests
             Assert.Equal("Clear", weatherForecastForTommorrow.Summary);
             Assert.Equal(20, ((WeatherForecast[])output)[0].TemperatureC);
             Assert.Equal(new DateTime(2021,9,3), weatherForecastForTommorrow.Date);
+        }
+        [Fact]
+        public void ConvertResponseToWeatherForecastForAfterTommorowTest()
+        {
+            // Assume
+            string content = LoadJsonFromResource();
+            var controller = new WeatherForecastController();
+
+            // Act
+            var output = controller.ConvertResponseToWeatherForecast(content);
+
+            // Assert
+            var weatherForecastForAfterTommorrow = ((WeatherForecast[])output)[1];
+            Assert.Equal("Clear", weatherForecastForAfterTommorrow.Summary);
+            Assert.Equal(20, ((WeatherForecast[])output)[0].TemperatureC);
+            Assert.Equal(new DateTime(2021, 9, 4), weatherForecastForAfterTommorrow.Date);
         }
         private string LoadJsonFromResource()
         {
