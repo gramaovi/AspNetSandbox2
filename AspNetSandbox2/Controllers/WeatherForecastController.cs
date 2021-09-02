@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 
 namespace AspNetSandbox2.Controllers
@@ -49,12 +50,13 @@ namespace AspNetSandbox2.Controllers
 
         public IEnumerable<WeatherForecast> ConvertResponseToWeatherForecast(string content)
         {
+            var json = JObject.Parse(content);
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
+                Summary = json["daily"][0]["weather"][0].Value<string>("main")
             })
             .ToArray();
         }
