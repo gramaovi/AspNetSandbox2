@@ -12,22 +12,11 @@ namespace AspNetSandbox2.Controllers
     public class WeatherForecastController : ControllerBase
     {
         private const float KELVIN_CONST = 273.15f;
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
- 
-
-        public WeatherForecastController()
-        {
-            
-        }
 
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var client = new RestClient("https://api.openweathermap.org/data/2.5/onecall?lat=46.31006&lon=23.72128&exclude=hourly,minutely&appid=baf0ee4e9de6d933b877336983a0b1c8");
+            var client = new RestClient("https://api.openweathermap.org/data/2.5/onecall?lat=46.31006&lon=23.72128&exclude=hourly,minutely&appid=3c01003ea64a26fde6e1fbeef8591064");
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
@@ -36,15 +25,7 @@ namespace AspNetSandbox2.Controllers
             return ConvertResponseToWeatherForecast(response.Content);
 
             
-            //var rng = new Random();
-            //return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            //{
-            //    Date = DateTime.Now.AddDays(index),
-            //    TemperatureC = rng.Next(-20, 55),
-            //    Summary = Summaries[rng.Next(Summaries.Length)]
-            //})
-            //.ToArray();
-            
+
         }
 
         public IEnumerable<WeatherForecast> ConvertResponseToWeatherForecast(string content,int days = 5)
