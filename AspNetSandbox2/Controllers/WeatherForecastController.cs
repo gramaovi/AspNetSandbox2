@@ -55,7 +55,7 @@ namespace AspNetSandbox2.Controllers
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
+                TemperatureC = (int)(json["daily"][0]["temp"].Value<float>("day") - 273.15f),
                 Summary = json["daily"][0]["weather"][0].Value<string>("main")
             })
             .ToArray();
