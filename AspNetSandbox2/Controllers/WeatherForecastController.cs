@@ -12,7 +12,7 @@ namespace AspNetSandbox2.Controllers
     public class WeatherForecastController : ControllerBase
     {
         private const float KELVIN_CONST = 273.15f;
-
+        [NonAction]
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
@@ -27,7 +27,32 @@ namespace AspNetSandbox2.Controllers
             
 
         }
+        [NonAction]
+        public CityCoordonates GetLocation()
+        {
+            var client = new RestClient("http://api.openweathermap.org/data/2.5/weather?q=Brasov&appid=3c01003ea64a26fde6e1fbeef8591064");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            IRestResponse response = client.Execute(request);
+            Console.WriteLine(response.Content);
 
+            return ConvertResponseToLocation(response.Content);
+        }
+
+        private CityCoordonates ConvertResponseToLocation(string content)
+        {
+            var json = JObject.Parse(content);
+            JToken jsonCoords = json["coord"];
+
+            return new CityCoordonates
+            {
+                Latitude = ExtractLatitudeFromCoordonates(jsonCoords),
+                Longitude =ExtractLongitudeFromCoordonates(jsonCoords)
+
+            };
+
+        }
+        [NonAction]
         public IEnumerable<WeatherForecast> ConvertResponseToWeatherForecast(string content,int days = 5)
         {
             var json = JObject.Parse(content);
@@ -51,6 +76,14 @@ namespace AspNetSandbox2.Controllers
         private static int ExtractCelsiusTemperatureFromDailyWeather(JToken jsonDailyForecast)
         {
             return (int)Math.Round(jsonDailyForecast["temp"].Value<float>("day") - KELVIN_CONST);
+        }
+        private static string ExtractLatitudeFromCoordonates(JToken jsonCoords)
+        {
+            return "Lat: " + jsonCoords.Value<string>("lat");
+        }
+        private static string ExtractLongitudeFromCoordonates(JToken jsonCoords)
+        {
+            return "Lat: " + jsonCoords.Value<string>("lon");
         }
     }
 }
