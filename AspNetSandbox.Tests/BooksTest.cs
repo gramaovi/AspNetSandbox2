@@ -59,7 +59,7 @@ namespace AspNetSandbox.Tests
             });
 
             // Assert
-            Assert.Equal("TReplace", booksService.GetBooks(1).Title);
+            Assert.Equal("TReplace", booksService.GetBooks(0).Title);
             Assert.Equal("TReplace", booksService.GetBooks(0).Author);
             Assert.Equal("TReplace", booksService.GetBooks(0).Language);
         }
