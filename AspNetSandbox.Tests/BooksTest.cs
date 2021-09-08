@@ -44,18 +44,16 @@ namespace AspNetSandbox.Tests
         [Fact]
         public void BooksServiceReplaceBookTest()
         {
-            //Asume
+            // Assume
             booksService = new BooksService();
-   
 
             // Act
-          
             booksService.ReplaceBook(0, new Book
             {
                 Id = 0,
                 Title = "TReplace",
                 Author = "TReplace",
-                Language = "TReplace"
+                Language = "TReplace",
             });
 
             // Assert
