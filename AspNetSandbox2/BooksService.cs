@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AspNetSandbox;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,32 +29,36 @@ namespace AspNetSandbox2
             });
         }
 
-        public IEnumerable<Book> Get()
+        public IEnumerable<Book> GetBooks()
         {
             return books;
         }
 
-        public Book Get(int id)
+        public Book GetBooks(int id)
         {
 
             return books.Single(book => book.Id == id);
 
         }
 
-        public void Post(Book value)
+        public void AddBook(Book value)
         {
-            int id = books.Count + 1;
+            int id = books.Count;
+
             value.Id = id;
             books.Add(value);
         }
-        public void Put(int id, string value)
+        public void ReplaceBook(int id, Book value)
         {
-
+            if (id == value.Id)
+            {
+                books[id - 1] = value;
+            }
         }
 
-        public void Delete(int id)
+        public void DeleteBook(int id)
         {
-            books.Remove(Get(id));
+            books.Remove(GetBooks(id));
         }
     }
 }

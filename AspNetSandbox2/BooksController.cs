@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetSandbox;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,18 +27,24 @@ namespace AspNetSandbox2
         [HttpGet]
         public IEnumerable<Book> Get()
         {
-            return booksService.Get();
+            return booksService.GetBooks();
         }
         private bool SomeFunction(Book book)
         {
             return book.Id == 1;
         }
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] Book value)
+        {
+            booksService.ReplaceBook(id, value);
+        }
+
         // GET api/<BooksController>/5
         [HttpGet("{id}")]
         public Book Get(int id)
         {
 
-            return booksService.Get(id);
+            return booksService.GetBooks(id);
 
         }
 
@@ -47,14 +54,14 @@ namespace AspNetSandbox2
         [HttpPost]
         public void Post([FromBody] Book value)
         {
-            booksService.Post(value);
+            booksService.AddBook(value);
         }
 
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            booksService.Delete(id);
+            booksService.DeleteBook(id);
         }
     }
 }
