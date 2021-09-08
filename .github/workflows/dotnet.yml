@@ -1,14 +1,22 @@
 name: .NET
 
+ 
+
 on:
   push:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
+
+ 
 
 jobs:
   build:
 
+ 
+
     runs-on: ubuntu-latest
+
+ 
 
     steps:
     - uses: actions/checkout@v2
