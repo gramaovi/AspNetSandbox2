@@ -43,9 +43,10 @@ namespace AspNetSandbox2
 
         public void AddBook(Book value)
         {
-            int id = books.Count;
+    
+            int lastId = books[books.Count - 1].Id;
+            value.Id = lastId + 1;
 
-            value.Id = id;
             books.Add(value);
         }
         public void ReplaceBook(int id, Book value)
