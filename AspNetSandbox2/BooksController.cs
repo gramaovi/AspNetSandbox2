@@ -8,25 +8,40 @@ using System.Threading.Tasks;
 
 namespace AspNetSandbox2
 {
-    
+
+
 
     [Route("api/[controller]")]
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly IBooksService booksService;
+        private Book[] books;
 
-
-        public BooksController( IBooksService booksService)
+        public BooksController()
         {
-            this.booksService = booksService;
+            books = new Book[2];
+            books[0] = new Book
+            {
+                Id = 0,
+                Title = "Amintirile peregrinului apter",
+                Language = "Romanian",
+                Author = "Valeriu Anania"
+            };
+
+            books[1] = new Book
+            {
+                Id = 1,
+                Title = "test",
+                Language = "Romanian",
+                Author = "asaa"
+            };
         }
-        
+
         // GET: api/<BooksController>
         [HttpGet]
         public IEnumerable<Book> Get()
         {
-            return booksService.Get() ;
+            return books;
         }
         private bool SomeFunction(Book book)
         {
@@ -36,15 +51,14 @@ namespace AspNetSandbox2
         [HttpGet("{id}")]
         public Book Get(int id)
         {
-         
-            return booksService.Get(id);
+
+            return books.Single(book => book.Id == id);
         }
 
         // POST api/<BooksController>
         [HttpPost]
-        public void Post([FromBody] Book value)
+        public void Post([FromBody] string value)
         {
-            booksService.Post(value);
         }
 
         // PUT api/<BooksController>/5
@@ -57,7 +71,6 @@ namespace AspNetSandbox2
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            booksService.Delete(id);
         }
     }
 }
