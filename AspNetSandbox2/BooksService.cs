@@ -8,6 +8,7 @@ namespace AspNetSandbox2
 {
     public class BooksService : IBooksService
     {
+        
         private List<Book> books;
         public BooksService()
         {
@@ -53,9 +54,11 @@ namespace AspNetSandbox2
         {
             if (id == value.Id)
             {
-                books[id - 1] = value;
+                books[id] = value;
             }
         }
+
+    
 
         public void DeleteBook(int id)
         {

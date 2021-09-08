@@ -20,9 +20,9 @@ namespace AspNetSandbox.Tests
 
             // Assert
             var weatherForecastForTommorrow = ((WeatherForecast[])output)[0];
-            Assert.Equal("Clear", weatherForecastForTommorrow.Summary);
+            Assert.Equal("Clouds", weatherForecastForTommorrow.Summary);
             Assert.Equal(20, ((WeatherForecast[])output)[0].TemperatureC);
-            Assert.Equal(new DateTime(2021,9,3), weatherForecastForTommorrow.Date);
+            Assert.Equal(new DateTime(2021,9,2), weatherForecastForTommorrow.Date);
         }
         [Fact]
         public void ConvertResponseToWeatherForecastForAfterTommorowTest()
@@ -38,7 +38,7 @@ namespace AspNetSandbox.Tests
             var weatherForecastForAfterTommorrow = ((WeatherForecast[])output)[1];
             Assert.Equal("Clear", weatherForecastForAfterTommorrow.Summary);
             Assert.Equal(20, ((WeatherForecast[])output)[0].TemperatureC);
-            Assert.Equal(new DateTime(2021, 9, 4), weatherForecastForAfterTommorrow.Date);
+            Assert.Equal(new DateTime(2021, 9, 3), weatherForecastForAfterTommorrow.Date);
         }
         private string LoadJsonFromResource()
         {
