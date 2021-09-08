@@ -15,26 +15,26 @@ namespace AspNetSandbox2
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private Book[] books;
+        private static List<Book> books;
 
-        public BooksController()
+        static BooksController()
         {
-            books = new Book[2];
-            books[0] = new Book
+            books = new List<Book>();
+            books.Add(new Book
             {
                 Id = 0,
                 Title = "Amintirile peregrinului apter",
                 Language = "Romanian",
                 Author = "Valeriu Anania"
-            };
+            });
 
-            books[1] = new Book
+            books.Add(new Book
             {
                 Id = 1,
                 Title = "test",
                 Language = "Romanian",
                 Author = "asaa"
-            };
+            });
         }
 
         // GET: api/<BooksController>
@@ -57,8 +57,11 @@ namespace AspNetSandbox2
 
         // POST api/<BooksController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Book value)
         {
+            int id = books.Count;
+            value.Id = id;
+            books.Add(value);
         }
 
         // PUT api/<BooksController>/5
