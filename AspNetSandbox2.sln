@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbSandbox", "DbSandbox\DbSandbox.csproj", "{ACA7BABD-BFE6-40FD-85AE-5CE171384D4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{1CBCDD17-AD55-4FC0-84EE-FB913E1FB736}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CBCDD17-AD55-4FC0-84EE-FB913E1FB736}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CBCDD17-AD55-4FC0-84EE-FB913E1FB736}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACA7BABD-BFE6-40FD-85AE-5CE171384D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACA7BABD-BFE6-40FD-85AE-5CE171384D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACA7BABD-BFE6-40FD-85AE-5CE171384D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACA7BABD-BFE6-40FD-85AE-5CE171384D4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
