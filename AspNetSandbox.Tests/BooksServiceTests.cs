@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AspNetSandbox2;
+using AspNetSandbox2.Models;
 using Xunit;
 
 namespace AspNetSandbox.Tests
