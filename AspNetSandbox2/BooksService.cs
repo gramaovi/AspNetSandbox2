@@ -10,22 +10,24 @@ namespace AspNetSandbox2
 
         public BooksService()
         {
-            books = new List<Book>();
-            books.Add(new Book
+            books = new List<Book>
             {
-                Id = 0,
-                Title = "Amintirile peregrinului apter",
-                Language = "Romanian",
-                Author = "Valeriu Anania",
-            });
+                new Book
+                {
+                    Id = 0,
+                    Title = "Amintirile peregrinului apter",
+                    Language = "Romanian",
+                    Author = "Valeriu Anania",
+                },
 
-            books.Add(new Book
-            {
-                Id = 1,
-                Title = "test",
-                Language = "Romanian",
-                Author = "asaa",
-            });
+                new Book
+                {
+                    Id = 1,
+                    Title = "test",
+                    Language = "Romanian",
+                    Author = "asaa",
+                },
+            };
         }
 
         public IEnumerable<Book> GetBooks()

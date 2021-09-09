@@ -56,10 +56,5 @@ namespace AspNetSandbox2
         {
             booksService.DeleteBook(id);
         }
-
-        private bool SomeFunction(Book book)
-        {
-            return book.Id == 1;
-        }
     }
 }
