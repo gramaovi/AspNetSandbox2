@@ -10,11 +10,11 @@ namespace DockerSandbox.Pages
 {
     public class PrivacyModel : PageModel
     {
-        private readonly ILogger<PrivacyModel> _logger;
+        private readonly ILogger<PrivacyModel> loggerCopy;
 
         public PrivacyModel(ILogger<PrivacyModel> logger)
         {
-            _logger = logger;
+            loggerCopy = logger;
         }
 
         public void OnGet()

@@ -12,6 +12,7 @@ namespace AspNetSandbox2
 
         public string Summary { get; set; }
     }
+
     public class WeatherForecastLatLong
     {
         public float Lat { get; set; }

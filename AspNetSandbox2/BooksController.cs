@@ -1,17 +1,11 @@
-﻿using AspNetSandbox;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AspNetSandbox;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace AspNetSandbox2
 {
-
-
-
     [Route("api/[controller]")]
     [ApiController]
     public class BooksController : ControllerBase
@@ -29,10 +23,7 @@ namespace AspNetSandbox2
         {
             return booksService.GetBooks();
         }
-        private bool SomeFunction(Book book)
-        {
-            return book.Id == 1;
-        }
+
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Book value)
         {
@@ -49,13 +40,10 @@ namespace AspNetSandbox2
             }
             catch (Exception ex)
             {
-                return NotFound();
+                return NotFound(ex);
             }
-
         }
 
-        // POST api/<BooksController>
-        [HttpPost]
         // POST api/<BooksController>
         [HttpPost]
         public void Post([FromBody] Book value)
@@ -63,11 +51,15 @@ namespace AspNetSandbox2
             booksService.AddBook(value);
         }
 
-
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
             booksService.DeleteBook(id);
+        }
+
+        private bool SomeFunction(Book book)
+        {
+            return book.Id == 1;
         }
     }
 }

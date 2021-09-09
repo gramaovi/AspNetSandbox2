@@ -1,4 +1,4 @@
-using AspNetSandbox2;
+﻿using AspNetSandbox2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +10,12 @@ namespace AspNetSandbox.Tests
 {
     public class BooksServiceTests
     {
-
         private BooksService booksService;
-      
+
         [Fact]
         public void BooksServiceAddBookTest()
         {
-            //Asume
+            // Asume
             booksService = new BooksService();
 
             // Act
@@ -24,16 +23,15 @@ namespace AspNetSandbox.Tests
             {
                 Title = "T1",
                 Author = "T1 ",
-                Language = "T1"
+                Language = "T1",
             });
             booksService.DeleteBook(2);
             booksService.AddBook(new Book
             {
                 Title = "T2",
                 Author = "T2",
-                Language = "T2"
+                Language = "T2",
             });
-
 
             // Assert
             Assert.Equal("T2", booksService.GetBooks(2).Title);
