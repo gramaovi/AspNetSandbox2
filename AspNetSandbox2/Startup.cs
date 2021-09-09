@@ -35,9 +35,13 @@ namespace AspNetSandbox2
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi2", Version = "v1" });
 
-                // Set the comments path for the Swagger JSON and UI.
+                // <MARKED> Set the comments path for the Swagger JSON and UI .
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+
+                // <MARKED>.
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+                // <MARKED>.
                 c.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
             });
             services.AddSingleton<IBooksService, BooksService>();
