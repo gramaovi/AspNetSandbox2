@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DbSandbox.Models;
 
 namespace DbSandbox.Data
 {
@@ -12,5 +13,6 @@ namespace DbSandbox.Data
             : base(options)
         {
         }
+        public DbSet<DbSandbox.Models.Book> Book { get; set; }
     }
 }
