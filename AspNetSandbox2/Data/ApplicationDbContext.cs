@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using AspNetSandbox2.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspNetSandbox2.Data
 {
@@ -13,6 +13,7 @@ namespace AspNetSandbox2.Data
             : base(options)
         {
         }
+
         public DbSet<AspNetSandbox2.Models.Book> Book { get; set; }
     }
 }

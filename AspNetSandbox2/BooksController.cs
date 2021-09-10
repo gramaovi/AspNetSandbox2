@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AspNetSandbox;
+using AspNetSandbox2.Data;
 using AspNetSandbox2.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace AspNetSandbox2
@@ -11,33 +14,37 @@ namespace AspNetSandbox2
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly IBooksService booksService;
+        private readonly ApplicationDbContext _context;
 
-        public BooksController(IBooksService booksService)
+        public BooksController(ApplicationDbContext context)
         {
-            this.booksService = booksService;
+            _context = context;
         }
 
         // GET: api/<BooksController>
         [HttpGet]
-        public IEnumerable<Book> Get()
+        public async Task<IActionResult> Get()
         {
-            return booksService.GetBooks();
+            return Ok(await _context.Book.ToListAsync());
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Book value)
+        public async Task<IActionResult> Put(int id, [FromBody] Book book)
         {
-            booksService.ReplaceBook(id, value);
+             _context.Update(book);
+             await _context.SaveChangesAsync();
+             return Ok();
         }
 
         // GET api/<BooksController>/5
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             try
             {
-                return Ok(booksService.GetBooks(id));
+                var book = await _context.Book
+                .FirstOrDefaultAsync(m => m.Id == id);
+                return Ok(book);
             }
             catch (Exception ex)
             {
@@ -47,15 +54,27 @@ namespace AspNetSandbox2
 
         // POST api/<BooksController>
         [HttpPost]
-        public void Post([FromBody] Book value)
+        public async Task<IActionResult> Post([FromBody] Book book)
         {
-            booksService.AddBook(value);
+            if (ModelState.IsValid)
+            {
+                _context.Add(book);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            booksService.DeleteBook(id);
+             var book = await _context.Book.FindAsync(id);
+             _context.Book.Remove(book);
+             await _context.SaveChangesAsync();
+             return Ok();
         }
     }
 }
