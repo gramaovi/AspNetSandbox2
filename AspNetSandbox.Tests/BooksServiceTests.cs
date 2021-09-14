@@ -11,13 +11,13 @@ namespace AspNetSandbox.Tests
 {
     public class BooksServiceTests
     {
-        private BooksService booksService;
+        private BooksInMemoryRepository booksService;
 
         [Fact]
-        public void BooksServiceAddBookTest()
+        public void BooksInMemoryRepository()
         {
             // Asume
-            booksService = new BooksService();
+            booksService = new BooksInMemoryRepository();
 
             // Act
             booksService.AddBook(new Book
@@ -44,7 +44,7 @@ namespace AspNetSandbox.Tests
         public void BooksServiceReplaceBookTest()
         {
             // Assume
-            booksService = new BooksService();
+            booksService = new BooksInMemoryRepository();
 
             // Act
             booksService.ReplaceBook(0, new Book

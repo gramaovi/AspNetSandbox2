@@ -4,7 +4,7 @@ using AspNetSandbox2.Models;
 
 namespace AspNetSandbox
 {
-    public interface IBooksService
+    public interface IBookRepository
     {
         void DeleteBook(int id);
 

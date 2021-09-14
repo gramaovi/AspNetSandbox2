@@ -5,11 +5,11 @@ using AspNetSandbox2.Models;
 
 namespace AspNetSandbox2
 {
-    public class BooksService : IBooksService
+    public class BooksInMemoryRepository : IBookRepository
     {
         private List<Book> books;
 
-        public BooksService()
+        public BooksInMemoryRepository()
         {
             books = new List<Book>
             {
