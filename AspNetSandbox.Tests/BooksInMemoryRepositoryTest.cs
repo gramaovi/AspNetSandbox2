@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using AspNetSandbox2;
 using AspNetSandbox2.Models;
+using AspNetSandbox2.Services;
 using Xunit;
 
 namespace AspNetSandbox.Tests
 {
-    public class BooksServiceTests
+    public class BooksInMemoryRepositoryTest
     {
         private BooksInMemoryRepository booksService;
 
