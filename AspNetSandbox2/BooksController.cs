@@ -32,9 +32,8 @@ namespace AspNetSandbox2
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Book book)
         {
-             _context.Update(book);
-             _context.SaveChangesAsync();
-             return Ok();
+            repository.ReplaceBook(id, book);
+            return Ok();
         }
 
         // GET api/<BooksController>/5
