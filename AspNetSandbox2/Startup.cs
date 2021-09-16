@@ -43,6 +43,7 @@ namespace AspNetSandbox2
                 .AddEntityFrameworkStores<ApplicationDbContext>();
                      services.AddRazorPages();
                      services.AddControllers();
+                    
                      services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi2", Version = "v1" });
@@ -56,7 +57,8 @@ namespace AspNetSandbox2
                 // <MARKED>.
                 c.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
             });
-                     services.AddScoped<IBookRepository, DbBooksRepository>();
+            services.AddSignalR();
+            services.AddScoped<IBookRepository, DbBooksRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -98,7 +100,8 @@ namespace AspNetSandbox2
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
 
-                endpoints.MapRazorPages();
+               // endpoints.MapRazorPages();
+                endpoints.MapHub<MessageHub>("/messagehub");
             });
         }
     }
