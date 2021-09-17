@@ -8,5 +8,5 @@ connection.start().then(function () {
     return console.error(err.toString());
 });
 connection.on("BookCreated", function (book) {
-    console.log("Book Created:" + JSON.stringify(book));
+    console.log('Book Created: $(JSON.stringify(book)}');
 });

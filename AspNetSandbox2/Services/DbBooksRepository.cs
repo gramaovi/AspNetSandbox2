@@ -1,5 +1,6 @@
 ﻿using AspNetSandbox;
 using AspNetSandbox2.Data;
+using AspNetSandbox2.DTOs;
 using AspNetSandbox2.Models;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,11 @@ namespace AspNetSandbox2.Services
         {
             _context.Update(book);
             _context.SaveChanges();
+        }
+
+        public void AddBook(CreateBookDto book)
+        {
+            throw new NotImplementedException();
         }
     }
 }

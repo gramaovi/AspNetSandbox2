@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AspNetSandbox;
+using AspNetSandbox2.DTOs;
 using AspNetSandbox2.Models;
 
 namespace AspNetSandbox2.Services
@@ -60,6 +61,11 @@ namespace AspNetSandbox2.Services
         public void DeleteBook(int id)
         {
             books.Remove(GetBooks(id));
+        }
+
+        public void AddBook(CreateBookDto book)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

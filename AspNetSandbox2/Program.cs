@@ -13,6 +13,7 @@ namespace AspNetSandbox2
     {
         public static void Main(string[] args)
         {
+            
             CreateHostBuilder(args).Build().Run();
         }
 

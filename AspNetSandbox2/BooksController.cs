@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AspNetSandbox;
 using AspNetSandbox2.Data;
+using AspNetSandbox2.DTOs;
 using AspNetSandbox2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -56,7 +57,7 @@ namespace AspNetSandbox2
 
         // POST api/<BooksController>
         [HttpPost]
-        public IActionResult Post([FromBody] Book book)
+        public IActionResult Post([FromBody] CreateBookDto book)
         {
             if (ModelState.IsValid)
             {
