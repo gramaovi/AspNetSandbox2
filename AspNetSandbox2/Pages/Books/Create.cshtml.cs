@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AspNetSandbox2.Data;
 using AspNetSandbox2.Models;
+using Microsoft.AspNetCore.SignalR;
 
 namespace AspNetSandbox2.Pages.Books
 {
     public class CreateModel : PageModel
     {
         private readonly AspNetSandbox2.Data.ApplicationDbContext _context;
+        private readonly IHubContext<MessageHub> hubContext;
 
-        public CreateModel(AspNetSandbox2.Data.ApplicationDbContext context)
+        public CreateModel(AspNetSandbox2.Data.ApplicationDbContext context, IHubContext<MessageHub> hubContext)
         {
             _context = context;
+            this.hubContext = hubContext;
         }
 
         public IActionResult OnGet()
