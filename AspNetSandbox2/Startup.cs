@@ -18,6 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 
 namespace AspNetSandbox2
 {
@@ -38,16 +39,16 @@ namespace AspNetSandbox2
                AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContext<ApplicationDbContext>(options =>
 
-                options.UseNpgsql(
-                    Configuration.GetConnectionString("DefaultConnection")));
-                     services.AddDatabaseDeveloperPageExceptionFilter();
+                options.UseNpgsql(GetConnectionString()));
+                 
+            services.AddDatabaseDeveloperPageExceptionFilter();
 
-                     services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-                     services.AddRazorPages();
-                     services.AddControllers();
-                    
-                     services.AddSwaggerGen(c =>
+            services.AddRazorPages();
+            services.AddControllers();
+
+            services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi2", Version = "v1" });
 
@@ -62,6 +63,21 @@ namespace AspNetSandbox2
             });
             services.AddSignalR();
             services.AddScoped<IBookRepository, DbBooksRepository>();
+        }
+
+        private string GetConnectionString()
+        {
+            var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
+            if (connectionString != null)
+            {
+                return ConvertConnectionString(connectionString);
+            }
+            return Configuration.GetConnectionString("DefaultConnection");
+        }
+
+        private string ConvertConnectionString(string connectionString)
+        {
+            throw new NotImplementedException();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
