@@ -11,7 +11,7 @@ namespace AspNetSandbox
 
         IEnumerable<Book> GetBooks();
 
-        Book GetBooks(int id);
+        Book GetBooksById(int id);
 
         void AddBook(Book value);
 

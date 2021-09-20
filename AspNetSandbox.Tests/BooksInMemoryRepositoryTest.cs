@@ -36,9 +36,9 @@ namespace AspNetSandbox.Tests
             });
 
             // Assert
-            Assert.Equal("T2", booksService.GetBooks(2).Title);
-            Assert.Equal("T2", booksService.GetBooks(2).Author);
-            Assert.Equal("T2", booksService.GetBooks(2).Language);
+            Assert.Equal("T2", booksService.GetBooksById(2).Title);
+            Assert.Equal("T2", booksService.GetBooksById(2).Author);
+            Assert.Equal("T2", booksService.GetBooksById(2).Language);
         }
 
         [Fact]
@@ -57,9 +57,9 @@ namespace AspNetSandbox.Tests
             });
 
             // Assert
-            Assert.Equal("TReplace", booksService.GetBooks(0).Title);
-            Assert.Equal("TReplace", booksService.GetBooks(0).Author);
-            Assert.Equal("TReplace", booksService.GetBooks(0).Language);
+            Assert.Equal("TReplace", booksService.GetBooksById(0).Title);
+            Assert.Equal("TReplace", booksService.GetBooksById(0).Author);
+            Assert.Equal("TReplace", booksService.GetBooksById(0).Language);
         }
     }
 }

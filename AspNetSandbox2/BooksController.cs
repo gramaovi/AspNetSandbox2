@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace AspNetSandbox2
 {
+    [NonAction]
     [Route("api/[controller]")]
     [ApiController]
     public class BooksController : ControllerBase
@@ -33,7 +34,9 @@ namespace AspNetSandbox2
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(repository.GetBooks());
+            var bookList = repository.GetBooks();
+            var bookDtoList = mapper.Map<IEnumerable<ReadBookDto>>(bookList);
+            return Ok(bookDtoList);
         }
 
         [HttpPut("{id}")]
@@ -51,8 +54,9 @@ namespace AspNetSandbox2
         {
             try
             {
-                var book = repository.GetBooks(id);
-                return Ok(book);
+                Book book = repository.GetBooksById(id);
+                ReadBookDto bookDto = mapper.Map<ReadBookDto>(book);
+                return Ok(bookDto);
             }
             catch (Exception ex)
             {

@@ -37,7 +37,7 @@ namespace AspNetSandbox2.Services
             return books;
         }
 
-        public Book GetBooks(int id)
+        public Book GetBooksById(int id)
         {
             return books.Single(book => book.Id == id);
         }
@@ -60,7 +60,7 @@ namespace AspNetSandbox2.Services
 
         public void DeleteBook(int id)
         {
-            books.Remove(GetBooks(id));
+            books.Remove(GetBooksById(id));
         }
 
         public void AddBook(CreateBookDto book)
