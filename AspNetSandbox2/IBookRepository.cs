@@ -17,6 +17,6 @@ namespace AspNetSandbox
 
         void ReplaceBook(int id, Book value);
 
-        void AddBook(CreateBookDto book);
+  
     }
 }

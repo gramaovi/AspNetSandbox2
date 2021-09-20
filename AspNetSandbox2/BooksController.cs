@@ -5,6 +5,7 @@ using AspNetSandbox;
 using AspNetSandbox2.Data;
 using AspNetSandbox2.DTOs;
 using AspNetSandbox2.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
@@ -19,11 +20,13 @@ namespace AspNetSandbox2
         private readonly IBookRepository repository;
         private readonly ApplicationDbContext _context;
         private readonly IHubContext<MessageHub> hubContext;
+        private readonly IMapper mapper;
 
-        public BooksController(IBookRepository repository, IHubContext<MessageHub> hubContext)
+        public BooksController(IBookRepository repository, IHubContext<MessageHub> hubContext, IMapper mapper)
         {
             this.repository = repository;
             this.hubContext = hubContext;
+            this.mapper = mapper;
         }
 
         // GET: api/<BooksController>
@@ -57,12 +60,13 @@ namespace AspNetSandbox2
 
         // POST api/<BooksController>
         [HttpPost]
-        public IActionResult Post([FromBody] CreateBookDto book)
+        public IActionResult Post([FromBody] CreateBookDto bookDto)
         {
             if (ModelState.IsValid)
             {
+                Book book = mapper.Map<Book>(bookDto);
                 repository.AddBook(book);
-                hubContext.Clients.All.SendAsync("CreatedBook", book);
+                hubContext.Clients.All.SendAsync("CreatedBook", bookDto);
                 return Ok();
             }
             else

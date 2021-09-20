@@ -8,16 +8,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AspNetSandbox2.Data;
 using AspNetSandbox2.Models;
+using Microsoft.AspNetCore.SignalR;
 
 namespace AspNetSandbox2.Pages.Books
 {
     public class EditModel : PageModel
     {
         private readonly AspNetSandbox2.Data.ApplicationDbContext _context;
-
-        public EditModel(AspNetSandbox2.Data.ApplicationDbContext context)
+        private readonly IHubContext<MessageHub> hubContext;
+        public EditModel(AspNetSandbox2.Data.ApplicationDbContext context, IHubContext<MessageHub> hubContext)
         {
             _context = context;
+            this.hubContext = hubContext;
         }
 
         [BindProperty]
@@ -41,7 +43,7 @@ namespace AspNetSandbox2.Pages.Books
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id, Book book)
         {
             if (!ModelState.IsValid)
             {
@@ -62,7 +64,9 @@ namespace AspNetSandbox2.Pages.Books
                 }
                 else
                 {
-                    throw;
+                    _context.Book.Update(Book);
+                    await hubContext.Clients.All.SendAsync("EditedBook", Book);
+                    await _context.SaveChangesAsync();
                 }
             }
 
