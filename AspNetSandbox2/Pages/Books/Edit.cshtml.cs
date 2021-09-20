@@ -43,18 +43,20 @@ namespace AspNetSandbox2.Pages.Books
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(int id, Book book)
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Book).State = EntityState.Modified;
+         
 
             try
             {
+                _context.Book.Update(Book);
                 await _context.SaveChangesAsync();
+                await hubContext.Clients.All.SendAsync("UpdatedBook", Book);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -64,9 +66,7 @@ namespace AspNetSandbox2.Pages.Books
                 }
                 else
                 {
-                    _context.Book.Update(Book);
-                    await hubContext.Clients.All.SendAsync("EditedBook", Book);
-                    await _context.SaveChangesAsync();
+                    throw;
                 }
             }
 

@@ -37,9 +37,11 @@ namespace AspNetSandbox2
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Book book)
+        public IActionResult Put(int id, [FromBody] CreateBookDto bookDto)
         {
+            Book book = mapper.Map<Book>(bookDto);
             repository.ReplaceBook(id, book);
+            hubContext.Clients.All.SendAsync("UpdatedBook", book);
             return Ok();
         }
 
@@ -66,7 +68,7 @@ namespace AspNetSandbox2
             {
                 Book book = mapper.Map<Book>(bookDto);
                 repository.AddBook(book);
-                hubContext.Clients.All.SendAsync("CreatedBook", bookDto);
+                hubContext.Clients.All.SendAsync("CreatedBook", book);
                 return Ok();
             }
             else
@@ -78,7 +80,8 @@ namespace AspNetSandbox2
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            repository.DeleteBook(repository.GetBooks(id).Id);
+            repository.DeleteBook(id);
+            hubContext.Clients.All.SendAsync("DeletedBook", id);
             return Ok();
         }
     }
