@@ -108,19 +108,7 @@ namespace AspNetSandbox2
             defaultFilesOptions.DefaultFileNames.Add("index.html");
             app.UseDefaultFiles(defaultFilesOptions);
             app.UseStaticFiles();
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                
-                var applicationDbContext = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
-                if(applicationDbContext.Book.Any())
-                {
-                    Console.WriteLine("the books are there");
-                }
-                else
-                {
-                    Console.WriteLine("No books");
-                }
-            }
+          
             app.UseRouting();
 
             app.UseAuthentication();
@@ -138,6 +126,8 @@ namespace AspNetSandbox2
                // endpoints.MapRazorPages();
                 endpoints.MapHub<MessageHub>("/messagehub");
             });
+
+            DataTools.SeedData(app);
         }
     }
 
