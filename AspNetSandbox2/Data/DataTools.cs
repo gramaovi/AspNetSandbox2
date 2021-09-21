@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AspNetSandbox2.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,22 @@ namespace AspNetSandbox2.Data
                 }
                 else
                 {
-                    Console.WriteLine("No books");
+                    var book = new Book
+                    {
+                        Title = "In search of lost time",
+                        Author = "Marcel Proust",
+                        Language = "English",
+                    };
+                    applicationDbContext.Add(book);
+                    var book2 = new Book
+                    {
+                        Title = "Ulysses",
+                        Author = "James Joyce",
+                        Language = "English",
+                    };
+                    applicationDbContext.Add(book2);
+                    applicationDbContext.SaveChanges();
+
                 }
             }
         }
