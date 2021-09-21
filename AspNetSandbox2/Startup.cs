@@ -127,7 +127,7 @@ namespace AspNetSandbox2
                 endpoints.MapHub<MessageHub>("/messagehub");
             });
 
-            DataTools.SeedData(app);
+            app.SeedData();
         }
     }
 

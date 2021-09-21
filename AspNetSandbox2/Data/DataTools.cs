@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace AspNetSandbox2.Data
 {
-    public class DataTools
+    public static class DataTools
     {
-        public static void SeedData(IApplicationBuilder app)
+        public static void SeedData(this IApplicationBuilder app)
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
