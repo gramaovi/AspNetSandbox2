@@ -29,18 +29,23 @@ namespace AspNetSandbox2
             Configuration = configuration;
         }
 
+        public static string ConvertConnectionString(string connectionString)
+        {
+            Uri uri = new Uri(connectionString);
+            string converted = $"Server={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};User Id={uri.UserInfo.Split(":")[0]};Password={uri.UserInfo.Split(":")[1]};SSL Mode=Require;Trust Server Certificate=true";
+            return converted;
+        }
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddAutoMapper(
                AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContext<ApplicationDbContext>(options =>
 
                 options.UseNpgsql(GetConnectionString()));
-                 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -63,25 +68,6 @@ namespace AspNetSandbox2
             });
             services.AddSignalR();
             services.AddScoped<IBookRepository, DbBooksRepository>();
-        }
-
-        private string GetConnectionString()
-        {
-            var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
-            if (connectionString != null)
-            {
-                return ConvertConnectionString(connectionString);
-            }
-            return Configuration.GetConnectionString("DefaultConnection");
-        }
-
-        public static string ConvertConnectionString(string connectionString)
-        {
-
-
-            Uri uri = new Uri(connectionString);
-            string converted = $"Server={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};User Id={uri.UserInfo.Split(":")[0]};Password={uri.UserInfo.Split(":")[1]};SSL Mode=Require;Trust Server Certificate=true";
-            return converted;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -108,7 +94,6 @@ namespace AspNetSandbox2
             defaultFilesOptions.DefaultFileNames.Add("index.html");
             app.UseDefaultFiles(defaultFilesOptions);
             app.UseStaticFiles();
-          
             app.UseRouting();
 
             app.UseAuthentication();
@@ -123,11 +108,22 @@ namespace AspNetSandbox2
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
 
-               // endpoints.MapRazorPages();
+                // endpoints.MapRazorPages();
                 endpoints.MapHub<MessageHub>("/messagehub");
             });
 
             app.SeedData();
+        }
+
+        private string GetConnectionString()
+        {
+            var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
+            if (connectionString != null)
+            {
+                return ConvertConnectionString(connectionString);
+            }
+
+            return Configuration.GetConnectionString("DefaultConnection");
         }
     }
 

@@ -1,10 +1,10 @@
-﻿using AspNetSandbox2.Models;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetSandbox2.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetSandbox2.Data
 {
@@ -14,7 +14,6 @@ namespace AspNetSandbox2.Data
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-
                 var applicationDbContext = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
                 if (applicationDbContext.Book.Any())
                 {
@@ -37,7 +36,6 @@ namespace AspNetSandbox2.Data
                     };
                     applicationDbContext.Add(book2);
                     applicationDbContext.SaveChanges();
-
                 }
             }
         }

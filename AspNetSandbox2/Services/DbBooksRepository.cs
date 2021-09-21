@@ -1,18 +1,18 @@
-﻿using AspNetSandbox;
-using AspNetSandbox2.Data;
-using AspNetSandbox2.DTOs;
-using AspNetSandbox2.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetSandbox;
+using AspNetSandbox2.Data;
+using AspNetSandbox2.DTOs;
+using AspNetSandbox2.Models;
 
 namespace AspNetSandbox2.Services
 {
     public class DbBooksRepository : IBookRepository
     {
-        private List<Book> books;
         private readonly ApplicationDbContext _context;
+        private List<Book> books;
 
         public DbBooksRepository(ApplicationDbContext context)
         {

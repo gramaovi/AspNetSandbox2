@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetSandbox2.Data;
+using AspNetSandbox2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using AspNetSandbox2.Data;
-using AspNetSandbox2.Models;
 
 namespace AspNetSandbox2.Pages.Books
 {
@@ -19,7 +19,7 @@ namespace AspNetSandbox2.Pages.Books
             _context = context;
         }
 
-        public IList<Book> Book { get;set; }
+        public IList<Book> Book { get; set; }
 
         public async Task OnGetAsync()
         {

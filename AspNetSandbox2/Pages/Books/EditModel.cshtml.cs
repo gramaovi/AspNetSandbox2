@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetSandbox2.Data;
+using AspNetSandbox2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AspNetSandbox2.Data;
-using AspNetSandbox2.Models;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspNetSandbox2.Pages.Books
 {
@@ -16,6 +16,7 @@ namespace AspNetSandbox2.Pages.Books
     {
         private readonly AspNetSandbox2.Data.ApplicationDbContext _context;
         private readonly IHubContext<MessageHub> hubContext;
+
         public EditModel(AspNetSandbox2.Data.ApplicationDbContext context, IHubContext<MessageHub> hubContext)
         {
             _context = context;
@@ -38,6 +39,7 @@ namespace AspNetSandbox2.Pages.Books
             {
                 return NotFound();
             }
+
             return Page();
         }
 
@@ -49,8 +51,6 @@ namespace AspNetSandbox2.Pages.Books
             {
                 return Page();
             }
-
-         
 
             try
             {

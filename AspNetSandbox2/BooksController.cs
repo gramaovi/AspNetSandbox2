@@ -18,7 +18,6 @@ namespace AspNetSandbox2
     public class BooksController : ControllerBase
     {
         private readonly IBookRepository repository;
-        private readonly ApplicationDbContext _context;
         private readonly IHubContext<MessageHub> hubContext;
         private readonly IMapper mapper;
 
