@@ -11,9 +11,19 @@ namespace AspNetSandbox2
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static int Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+           
+         if(args.Length>0)
+            {
+                Console.WriteLine($"There are: {args.Length} args.");
+            }
+         else
+            {
+                Console.WriteLine("No arguments");
+            }
+             CreateHostBuilder(args).Build().Run();
+              return 0;
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
