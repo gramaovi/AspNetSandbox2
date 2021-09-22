@@ -1,4 +1,8 @@
-﻿## How to run in Docker from the commandline
+﻿#Ovidiu sandbox project for back-end course
+
+## How to run in Docker from the commandline
+
+Navigate to [AspNetSandbox](AspNetSandbox2) directory
 
 Build in container
 ```
