@@ -30,8 +30,6 @@ dotnet_diagnostic.IDE0017.severity = none
 # IDE0052: Remove unread private members
 dotnet_diagnostic.IDE0052.severity = none
 
-# SA1309: Field names should not begin with underscore
-dotnet_diagnostic.SA1309.severity = none
 
 # SA1601: Partial elements should be documented
 dotnet_diagnostic.SA1601.severity = none
