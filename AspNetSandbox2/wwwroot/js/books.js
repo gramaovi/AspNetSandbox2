@@ -9,7 +9,7 @@ connection.start().then(function () {
 
 
 
-connection.on("BookCreated", function (book) {
+connection.on("CreatedBook", function (book) {
     console.log(`Book Created: ${JSON.stringify(book)}`);
 
     $("tbody").append(`<tr>
@@ -30,7 +30,7 @@ connection.on("BookCreated", function (book) {
         </tr>`);
 });
 
-connection.on("BookUpdated", function (book) {
+connection.on("UpdatedBook", function (book) {
     console.log(`Book Updated: ${JSON.stringify(book)}`);
     var row = document.getElementById(`book-${book.id}`);
     row.innerHTML = `
@@ -50,7 +50,7 @@ connection.on("BookUpdated", function (book) {
         </td>`
 });
 
-connection.on("BookDeleted", function (book) {
+connection.on("DeletedBook", function (book) {
     console.log(`Book Deleted: ${JSON.stringify(book)}`);
     var row = document.getElementById(`book-${book.id}`);
     row.parentNode.removeChild(row);
