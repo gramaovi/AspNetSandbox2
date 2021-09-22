@@ -1,4 +1,9 @@
 ﻿#Ovidiu sandbox project for back-end course
+name | value
+--- | ---
+language | c#
+database | postgres
+deployed | https://webapp-sandbox-ovi.herokuapp.com/
 
 ## How to run in Docker from the commandline
 
