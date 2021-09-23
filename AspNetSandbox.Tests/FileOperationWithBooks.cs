@@ -42,5 +42,21 @@ namespace AspNetSandbox.Tests
 }
 ");
         }
+
+        [Fact]
+        public void ReadFilesTest()
+        {
+            using (var fileStream = File.OpenRead("netSettings.json"))
+            {
+                byte[] b = new byte[1024];
+                UTF8Encoding temp = new UTF8Encoding(true);
+
+                while (fileStream.Read(b, 0, b.Length) > 0)
+                {
+                    var returnedString = temp.GetString(b);
+                    Console.WriteLine(returnedString);
+                }
+            }
+        }
     }
 }
