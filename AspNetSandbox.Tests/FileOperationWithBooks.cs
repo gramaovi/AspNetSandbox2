@@ -24,23 +24,17 @@ namespace AspNetSandbox.Tests
         [Fact]
         public void CreateFileTest()
         {
-            File.WriteAllText("netSettings.json", @"{
-  ""ConnectionStrings"": {
-    ""DefaultConnection"": ""Host=localhost;Port=5432;Database=SandboxDb;User Id=postgres;Password=d34a76;Trust Server Certificate=true"",
-    ""LocalPostgresConnection"": ""Server=127.0.0.1;Port=5432;Database=aspNetSandbox-ovi;User Id=postgres;Password=d34a76;SSL Mode=Require;Trust Server Certificate=true"",
-    ""SqlConnection"": ""Server=(localdb)\\mssqllocaldb;Database=aspnet-AspNetSandbox2-C28FE6ED-5E7E-4F9C-ACD2-ADAC955C991B;Trusted_Connection=True;MultipleActiveResultSets=true"",
-    ""Heroku"": ""Server=ec2-44-195-247-84.compute-1.amazonaws.com;Port=5432;Database=d8nkn7e021eal0;User Id=vneponkvjjiqqb;Password=6d2fd7d56fb389fcf4f11c2dffea206a4ca7f6aa898d58ee2db025cfa0081d6d;SSL Mode=Require;Trust Server Certificate=true""
-  },
-  ""Logging"": {
-    ""LogLevel"": {
-      ""Default"": ""Information"",
-      ""Microsoft"": ""Warning"",
-      ""Microsoft.Hosting.Lifetime"": ""Information""
-    }
-  },
-  ""AllowedHosts"": ""*""
-}
-");
+            File.WriteAllText("README.md", @"Hello");
+        }
+
+        [Fact]
+        public void AppendFileTest()
+        {
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "README.md"), true))
+            {
+                outputFile.WriteLine("appended text");
+            }
         }
 
         [Fact]
