@@ -30,10 +30,17 @@ namespace AspNetSandbox.Tests
         [Fact]
         public void AppendFileTest()
         {
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "README.md"), true))
+            //  string path = AppDomain.CurrentDomain.BaseDirectory + "Image\\picture.png";
+            // string path = Directory.GetCurrentDirectory();
+            System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(".");
+            var path = directoryInfo.Parent.Parent.Parent.Parent.ToString();
+            var imgpath = path + "\\Image\\picture.png";
+            Console.WriteLine(path);
+           
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(path, "README.md"), true))
             {
-                outputFile.WriteLine("appended text");
+                //  outputFile.WriteLine(@"![img]("+imgpath+")");
+                outputFile.WriteLine(@"![img](Image\picture.png)");
             }
         }
 
