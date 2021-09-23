@@ -25,8 +25,24 @@ namespace AspNetSandbox2
              {
                  DataTools.connectionString = $"{options.ConnectionString}";
              });
+            if (args.Length == 1 && HelpRequired(args[0]))
+            {
+                Console.WriteLine("Help needed!");
+            }
+            else if (args.Length > 1)
+            {
+                Console.WriteLine($"There are {args.Length} arguments.");
+            }
+            else if (args.Length == 0)
+            {
+                Console.WriteLine("There are no arguments.");
+            }
             CreateHostBuilder(args).Build().Run();
             return 0;
+        }
+        private static bool HelpRequired(string argument)
+        {
+            return argument == "-h" || argument == "--help" || argument == "-?";
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
