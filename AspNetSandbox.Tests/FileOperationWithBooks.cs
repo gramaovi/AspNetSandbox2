@@ -40,7 +40,7 @@ namespace AspNetSandbox.Tests
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(path, "README.md"), true))
             {
                 //  outputFile.WriteLine(@"![img]("+imgpath+")");
-                outputFile.WriteLine(@"![img](Image\picture.png)");
+                outputFile.WriteLine(@"![img](Image/picture.png)");
             }
         }
 

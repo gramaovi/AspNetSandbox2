@@ -53,4 +53,4 @@ Release the container
 heroku container:release -a webapp-sandbox-ovi web
 ```
 
-![img](Image\picture.png)
+![img](Image/picture.png)
