@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetSandbox2.Data;
 using CommandLine;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,35 +15,16 @@ namespace AspNetSandbox2
     {
         public class Options
         {
-            [Option('v', "verbose", Required = false, HelpText = "Set output to verbose messages.")]
-            public bool Verbose { get; set; }
+            [Option('c', "connectionString", Required = false, HelpText = "Set the default connection string.")]
+            public string ConnectionString { get; set; }
         }
         public static int Main(string[] args)
         {
             Parser.Default.ParseArguments<Options>(args)
-                  .WithParsed<Options>(o =>
-                  {
-                      if (o.Verbose)
-                      {
-                          Console.WriteLine($"Verbose output enabled. Current Arguments: -v {o.Verbose}");
-                          Console.WriteLine("Quick Start Example! App is in Verbose mode!");
-                      }
-                      else
-                      {
-                          Console.WriteLine($"Current Arguments: -v {o.Verbose}");
-                          Console.WriteLine("Quick Start Example!");
-                      }
-                  });
-
-            if (args.Length > 0)
-            {
-                Console.WriteLine($"There are: {args.Length} args.");
-            }
-            else
-            {
-                Console.WriteLine("No arguments");
-            }
-
+             .WithParsed<Options>(options =>
+             {
+                 DataTools.connectionString = $"{options.ConnectionString}";
+             });
             CreateHostBuilder(args).Build().Run();
             return 0;
         }

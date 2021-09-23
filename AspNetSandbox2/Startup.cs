@@ -117,6 +117,11 @@ namespace AspNetSandbox2
 
         private string GetConnectionString()
         {
+            if (DataTools.connectionString != null)
+            {
+                return ConvertConnectionString(DataTools.connectionString);
+            }
+            
             var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
             if (connectionString != null)
             {

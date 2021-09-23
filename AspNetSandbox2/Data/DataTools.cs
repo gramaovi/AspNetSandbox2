@@ -10,6 +10,7 @@ namespace AspNetSandbox2.Data
 {
     public static class DataTools
     {
+        public static string connectionString = null;
         public static void SeedData(this IApplicationBuilder app)
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
