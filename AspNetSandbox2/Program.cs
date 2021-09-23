@@ -13,6 +13,15 @@ namespace AspNetSandbox2
 {
     public class Program
     {
+        public enum ExitCodes
+        {
+            /// <summary>Exit code for no errors.</summary>
+            NoError = 0,
+
+            /// <summary>Exit code for invalid arguments.</summary>
+            InvalidArguments = 1,
+        }
+
         public class Options
         {
             [Option('c', "connectionString", Required = false, HelpText = "Set the default connection string.")]
