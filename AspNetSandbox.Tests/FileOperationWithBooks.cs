@@ -47,6 +47,8 @@ namespace AspNetSandbox.Tests
         [Fact]
         public void ReadFilesTest()
         {
+            // Not working on git because file is ignored
+            /*
             using (var fileStream = File.OpenRead("netSettings.json"))
             {
                 byte[] b = new byte[1024];
@@ -58,6 +60,8 @@ namespace AspNetSandbox.Tests
                     Console.WriteLine(returnedString);
                 }
             }
+            */ 
+           
         }
     }
 }
