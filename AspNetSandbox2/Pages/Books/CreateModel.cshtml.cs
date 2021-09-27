@@ -13,12 +13,12 @@ namespace AspNetSandbox2.Pages.Books
 {
     public class CreateModel : PageModel
     {
-        private readonly AspNetSandbox2.Data.ApplicationDbContext _context;
+        private readonly AspNetSandbox2.Data.ApplicationDbContext context;
         private readonly IHubContext<MessageHub> hubContext;
 
         public CreateModel(AspNetSandbox2.Data.ApplicationDbContext context, IHubContext<MessageHub> hubContext)
         {
-            _context = context;
+            this.context = context;
             this.hubContext = hubContext;
         }
 
@@ -38,8 +38,8 @@ namespace AspNetSandbox2.Pages.Books
                 return Page();
             }
 
-            _context.Book.Add(Book);
-            await _context.SaveChangesAsync();
+            context.Book.Add(Book);
+            await context.SaveChangesAsync();
             await hubContext.Clients.All.SendAsync("CreatedBook", Book);
 
             return RedirectToPage("./Index");

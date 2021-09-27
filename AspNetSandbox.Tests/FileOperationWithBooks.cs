@@ -14,7 +14,7 @@ namespace AspNetSandbox.Tests
         public void EnumerateFilesTest()
         {
             System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(".");
-            var files=directoryInfo.EnumerateFiles();
+            var files = directoryInfo.EnumerateFiles();
             foreach (var file in files)
             {
                 Console.WriteLine(file.Name);
@@ -30,16 +30,13 @@ namespace AspNetSandbox.Tests
         [Fact]
         public void AppendFileTest()
         {
-            //  string path = AppDomain.CurrentDomain.BaseDirectory + "Image\\picture.png";
-            // string path = Directory.GetCurrentDirectory();
             System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(".");
             var path = directoryInfo.Parent.Parent.Parent.Parent.ToString();
             var imgpath = path + "\\Image\\picture.png";
             Console.WriteLine(path);
-           
+
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(path, "README.md"), true))
             {
-                //  outputFile.WriteLine(@"![img]("+imgpath+")");
                 outputFile.WriteLine(@"![img](Image/picture.png)");
             }
         }
@@ -60,8 +57,7 @@ namespace AspNetSandbox.Tests
                     Console.WriteLine(returnedString);
                 }
             }
-            */ 
-           
+            */
         }
     }
 }

@@ -68,7 +68,8 @@ namespace UserManagement
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-            app.CreateBasicRolesAsync();
+
+            _ = app.CreateBasicRolesAsync();
         }
     }
 }

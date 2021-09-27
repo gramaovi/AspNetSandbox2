@@ -27,12 +27,13 @@ namespace AspNetSandbox2
             [Option('c', "connectionString", Required = false, HelpText = "Set the default connection string.")]
             public string ConnectionString { get; set; }
         }
+
         public static int Main(string[] args)
         {
             Parser.Default.ParseArguments<Options>(args)
              .WithParsed<Options>(options =>
              {
-                 DataTools.connectionString = $"{options.ConnectionString}";
+                 DataTools.ConnectionString = $"{options.ConnectionString}";
              });
             if (args.Length == 1 && HelpRequired(args[0]))
             {
@@ -46,12 +47,9 @@ namespace AspNetSandbox2
             {
                 Console.WriteLine("There are no arguments.");
             }
+
             CreateHostBuilder(args).Build().Run();
             return 0;
-        }
-        private static bool HelpRequired(string argument)
-        {
-            return argument == "-h" || argument == "--help" || argument == "-?";
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -60,5 +58,10 @@ namespace AspNetSandbox2
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        private static bool HelpRequired(string argument)
+        {
+            return argument == "-h" || argument == "--help" || argument == "-?";
+        }
     }
 }

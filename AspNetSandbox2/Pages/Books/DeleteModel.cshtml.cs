@@ -13,12 +13,12 @@ namespace AspNetSandbox2.Pages.Books
 {
     public class DeleteModel : PageModel
     {
-        private readonly AspNetSandbox2.Data.ApplicationDbContext _context;
+        private readonly AspNetSandbox2.Data.ApplicationDbContext context;
         private readonly IHubContext<MessageHub> hubContext;
 
         public DeleteModel(AspNetSandbox2.Data.ApplicationDbContext context, IHubContext<MessageHub> hubContext)
         {
-            _context = context;
+            this.context = context;
             this.hubContext = hubContext;
         }
 
@@ -32,7 +32,7 @@ namespace AspNetSandbox2.Pages.Books
                 return NotFound();
             }
 
-            Book = await _context.Book.FirstOrDefaultAsync(m => m.Id == id);
+            Book = await context.Book.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Book == null)
             {
@@ -49,12 +49,12 @@ namespace AspNetSandbox2.Pages.Books
                 return NotFound();
             }
 
-            Book = await _context.Book.FindAsync(id);
+            Book = await context.Book.FindAsync(id);
 
             if (Book != null)
             {
-                _context.Book.Remove(Book);
-                await _context.SaveChangesAsync();
+                context.Book.Remove(Book);
+                await context.SaveChangesAsync();
                 await hubContext.Clients.All.SendAsync("DeletedBook", Book);
             }
 

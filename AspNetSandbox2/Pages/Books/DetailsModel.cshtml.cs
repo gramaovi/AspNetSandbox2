@@ -12,11 +12,11 @@ namespace AspNetSandbox2.Pages.Books
 {
     public class DetailsModel : PageModel
     {
-        private readonly AspNetSandbox2.Data.ApplicationDbContext _context;
+        private readonly AspNetSandbox2.Data.ApplicationDbContext context;
 
         public DetailsModel(AspNetSandbox2.Data.ApplicationDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         public Book Book { get; set; }
@@ -28,7 +28,7 @@ namespace AspNetSandbox2.Pages.Books
                 return NotFound();
             }
 
-            Book = await _context.Book.FirstOrDefaultAsync(m => m.Id == id);
+            Book = await context.Book.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Book == null)
             {
